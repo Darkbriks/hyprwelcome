@@ -1,0 +1,61 @@
+# ============================================================================
+# HyprWelcome - Thème : celeste-dark
+# ============================================================================
+# Chemin attendu : ~/.config/hyprwelcome/themes/celeste-dark/colors.toml
+# ============================================================================
+
+[meta]
+name        = "Celeste Dark"
+author      = "moi"
+variant     = "dark"    # "dark" | "colored" | "light"
+wallpaper   = "wallpaper.png"
+
+# ─── Couleurs de base ──────────────────────────────────────────────────────
+[colors]
+background          = "#1E2832"
+background_alt      = "#2C3E50"
+foreground          = "#E8E4DF"
+foreground_dim      = "#B8C5D0"
+
+border              = "#3D4E5C"
+border_active       = "#86BBD8"
+shadow              = "#00000060"
+
+# ─── Accents (référencés par les actions via la clé "color") ───────────────
+accent_primary      = "#86BBD8"     # Bleu ciel
+accent_secondary    = "#C2A1D3"     # Violet montagne
+accent_danger       = "#F4A6B8"     # Rose montagne
+accent_success      = "#A8D5BA"     # Vert cristal
+accent_warning      = "#F4D58D"     # Golden berry
+
+# ─── Boutons ───────────────────────────────────────────────────────────────
+[button]
+background          = "#2C3E50"
+background_hover    = "#3D4E5C"
+background_pressed  = "#1E2832"
+text_color          = "#E8E4DF"
+icon_color          = "#E8E4DF"
+border_radius       = 10            # px
+border_width        = 1             # px
+
+# ─── Configs à recharger lors du switch de thème ───────────────────────────
+# Chaque entrée : [chemin_template, chemin_destination]
+[[reload]]
+template    = "templates/hyprland-colors.conf"
+destination = "~/.config/hypr/theme.conf"
+reload_cmd  = "hyprctl reload"
+
+[[reload]]
+template    = "templates/waybar-colors.css"
+destination = "~/.config/waybar/colors.css"
+reload_cmd  = "pkill -SIGUSR2 waybar"
+
+[[reload]]
+template    = "templates/kitty-colors.conf"
+destination = "~/.config/kitty/theme.conf"
+reload_cmd  = "pkill -SIGUSR1 kitty"
+
+[[reload]]
+template    = "templates/mako-colors.ini"
+destination = "~/.config/mako/colors"
+reload_cmd  = "makoctl reload"

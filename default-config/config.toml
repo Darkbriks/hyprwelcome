@@ -1,0 +1,97 @@
+# ============================================================================
+# HyprWelcome - Configuration
+# ============================================================================
+# Ce fichier contrôle l'intégralité du comportement et du layout de l'outil.
+# Chemin attendu : ~/.config/hyprwelcome/config.toml
+# ============================================================================
+
+# ─── Application ───────────────────────────────────────────────────────────
+[app]
+subtitle_refresh = 5      # Fréquence de rafraîchissement des sous-titres (secondes)
+subtitle_cmd_timeout = 4  # Durée maximale d'exécution d'une commande de sous-titre (secondes)
+
+# ─── Fenêtre ──────────────────────────────────────────────────────────────
+[window]
+title       = "HyprWelcome"
+width       = 640
+height      = 480
+columns     = 3        # Nombre de colonnes dans la grille
+spacing     = 12       # Espacement entre les boutons (px)
+padding     = 20       # Padding intérieur de la fenêtre (px)
+button_height = 90     # Hauteur des boutons (px)
+
+# ─── Thème actif ──────────────────────────────────────────────────────────
+[theme]
+current = "default-theme"
+# Le thème est cherché dans ~/.config/hyprwelcome/themes/<current>/
+
+# ─── Actions ──────────────────────────────────────────────────────────────
+# Chaque action devient un bouton dans la grille.
+# Les boutons apparaissent dans l'ordre de définition.
+#
+# Champs disponibles :
+#   label    : texte affiché sur le bouton
+#   icon     : nom d'icône XDG (Nerd Font si préfixé par "nf:")
+#   command  : commande exécutée au clic
+#   color    : clé de couleur dans la palette du thème (optionnel)
+#   confirm  : demander confirmation avant d'exécuter (optionnel, défaut false)
+#   subtitle : commande ou texte statique pour le sous-titre du bouton (optionnel)
+# ──────────────────────────────────────────────────────────────────────────
+
+[[actions]]
+label   = "Mise à jour"
+icon    = "nf:󰚰"
+command = "kitty -- yay -Syu"
+color   = "accent_primary"
+subtitle = "cmd:yay -Qu 2>/dev/null | wc -l | xargs -I{} echo '{} paquets disponibles'"
+
+[[actions]]
+label   = "Nettoyer cache"
+icon    = "nf:󰃢"
+command = "kitty -- yay -Sc --noconfirm"
+color   = "accent_warning"
+confirm = true
+subtitle = "cmd:du -sh ~/.cache/yay 2>/dev/null | cut -f1 | xargs -I{} echo 'Cache yay : {}'"
+
+[[actions]]
+label   = "Miroirs"
+icon    = "nf:󰙴"
+command = "kitty -- sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist"
+color   = "accent_secondary"
+confirm = true
+subtitle = "Mise à jour de la liste des miroirs"
+
+[[actions]]
+label   = "Thème suivant"
+icon    = "nf:󰔎"
+command = "__theme_cycle__"
+color   = "accent_secondary"
+
+[[actions]]
+label   = "Recharger config"
+icon    = "nf:󰑓"
+command = "hyprctl reload"
+color   = "accent_primary"
+subtitle = "Hyprland + Waybar"
+
+[[actions]]
+label   = "Youtube"
+icon    = "nf:󰌗"
+command = "xdg-open https://www.youtube.com/"
+color   = "accent_primary"
+subtitle = "Ouvre YouTube dans le navigateur"
+
+[[actions]]
+label   = "From Zero"
+icon    = "nf:󰌗"
+command = "xdg-open https://www.youtube.com/watch?v=ay32SqJPpB0&list=OLAK5uy_llu148Ny0qF6bSApqzcVOQ9MaiCYySEG8"
+color   = "accent_primary"
+subtitle = "Lance l'album From Zero de Linkin Park sur YouTube"
+
+[[actions]]
+label   = "Redémarrer"
+icon    = "nf:󰜎"
+command = "systemctl reboot"
+color   = "accent_warning"
+confirm = true
+subtitle = "Redémarre l'ordinateur"
