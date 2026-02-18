@@ -1,0 +1,18 @@
+/* ============================================================================
+ *  Waybar - Colors (généré par HyprPanel, ne pas éditer manuellement)
+ *  Source : ~/.config/hyprpanel/themes/<nom>/templates/waybar-colors.css
+ *  Inclure dans style.css via : @import "colors.css";
+ *  ============================================================================ */
+
+@define-color background           {{background}};
+@define-color background_alt       {{background_alt}};
+@define-color foreground           {{foreground}};
+@define-color foreground_dim       {{foreground_dim}};
+@define-color border               {{border}};
+@define-color border_active        {{border_active}};
+
+@define-color accent_primary       {{accent_primary}};
+@define-color accent_secondary     {{accent_secondary}};
+@define-color accent_danger        {{accent_danger}};
+@define-color accent_success       {{accent_success}};
+@define-color accent_warning       {{accent_warning}};

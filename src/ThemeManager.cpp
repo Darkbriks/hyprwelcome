@@ -39,24 +39,28 @@ QString ThemeManager::expandHome(const QString& path) {
 }
 
 QString ThemeManager::renderTemplate(const std::string& tmpl, const ThemeColors& colors) {
-    std::string result = tmpl;
-    std::regex pattern{R"(\{\{(\w+)\}\})"};
+    std::regex  pattern{R"(\{\{(\w+)(?:\|(\w+))?\}\})"};
 
     std::string out;
-    auto begin = std::sregex_iterator(result.begin(), result.end(), pattern);
+    auto begin = std::sregex_iterator(tmpl.begin(), tmpl.end(), pattern);
     auto end   = std::sregex_iterator{};
 
     std::size_t lastPos = 0;
     for (auto it = begin; it != end; ++it) {
         const auto& match = *it;
-        out += result.substr(lastPos, match.position() - lastPos);
+        out += tmpl.substr(lastPos, match.position() - lastPos);
 
-        const QString key = QString::fromStdString(match[1].str());
-        out += colors.resolve(key).toStdString();
+        const QString key      = QString::fromStdString(match[1].str());
+        const QString modifier = QString::fromStdString(match[2].str());
+        QString       value    = colors.resolve(key);
 
+        if (modifier == "raw" && value.startsWith('#'))
+            value = value.sliced(1);  // retire le #
+
+        out += value.toStdString();
         lastPos = match.position() + match.length();
     }
-    out += result.substr(lastPos);
+    out += tmpl.substr(lastPos);
     return QString::fromStdString(out);
 }
 
@@ -108,7 +112,7 @@ ThemeColors ThemeManager::loadTheme(const QString& name) {
 
         for (const auto& [k, v] : *colors) {
             const auto key = QString::fromStdString(std::string{k});
-            if (key.startsWith("accent_")) {
+            if (key.startsWith("accent_") or key.startsWith("color_")) { // Les 16 couleurs de base sont regroupées avec les accents par commodité
                 if (const auto sv = v.as_string())
                     tc.accents[key] = QString::fromStdString(sv->get());
             }

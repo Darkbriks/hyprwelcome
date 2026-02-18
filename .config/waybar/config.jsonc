@@ -1,0 +1,223 @@
+// ============================================================================
+// Waybar — Config principale
+// ============================================================================
+// Structure en 3 îlots : gauche | centre | droite
+// ============================================================================
+
+// A ajouter :
+// Calendrier, power menu, backlight, wifi, battery
+
+{
+    "layer": "top",
+    "position": "top",
+    "height": 44,
+    "margin-top": 8,
+    "margin-left": 12,
+    "margin-right": 12,
+    "margin-bottom": 0,
+    "spacing": 0,
+    "exclusive": true,
+    "ipc": true,
+
+    // ─── Îlot gauche ──────────────────────────────────────────────
+    "modules-left": [
+        "custom/os",
+        "hyprland/workspaces",
+        "custom/separator-left",
+        "custom/panel"
+    ],
+
+    // ─── Îlot centre ──────────────────────────────────────────────
+    "modules-center": [
+        "custom/launcher-brave",
+        "custom/launcher-steam",
+        "custom/launcher-clion",
+        "custom/separator-center",
+        "wlr/taskbar"
+    ],
+
+    // ─── Îlot droit ───────────────────────────────────────────────
+    "modules-right": [
+        "tray",
+        "custom/separator-right",
+        "pulseaudio",
+        "cpu",
+        "memory",
+        "custom/gpu",
+        "custom/separator-right",
+        "clock",
+        "custom/survival-guide",
+        "custom/power"
+    ],
+
+    // =========================================================
+    // MODULES — ÎLOT GAUCHE
+    // =========================================================
+
+    "custom/os": {
+        "format": "󰣇",
+        "tooltip": false,
+        "on-click": "rofi -show drun"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1":  "󰋜",
+            "2":  "󰅬",
+            "3":  "󰖟",
+            "4":  "󰭹",
+            "default": "·"
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": []
+        },
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1"
+    },
+
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "󰈀  Connected",
+        "format-disconnected": "  Offline"
+    },
+
+    "battery": {
+        "format": "{capacity}%",
+        "format-charging": " {capacity}%",
+        "format-full": "  {capacity}%"
+    },
+
+    "custom/panel": {
+        "format": "󰒓",
+        "tooltip": "HyprWelcome",
+        "on-click": "~/.local/bin/hyprwelcome"
+    },
+
+    // =========================================================
+    // MODULES — ÎLOT CENTRE
+    // =========================================================
+
+    "custom/launcher-brave": {
+        "format": "󰖟",
+        "tooltip": "Brave",
+        "on-click": "brave"
+    },
+
+    "custom/launcher-steam": {
+        "format": "󰓓",
+        "tooltip": "Steam",
+        "on-click": "steam"
+    },
+
+    "custom/launcher-clion": {
+        "format": "",
+        "tooltip": "CLion",
+        "on-click": "clion"
+    },
+
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 18,
+        "tooltip": true,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [],
+        "app_ids-mapping": {
+            "brave-browser": "brave"
+        }
+    },
+
+    // =========================================================
+    // MODULES — ÎLOT DROIT
+    // =========================================================
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8,
+        "show-passive-items": true
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-",
+        "tooltip": true,
+        "tooltip-format": "{desc}"
+    },
+
+    "cpu": {
+        "interval": 3,
+        "format": "󰻠 {usage}%",
+        "tooltip": true,
+        "tooltip-format": "CPU : {usage}%\nLoad : {load}"
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "󰍛 {used:.1f}G",
+        "tooltip": true,
+        "tooltip-format": "RAM : {used:.1f}G / {total:.1f}G\nSwap : {swapUsed:.1f}G / {swapTotal:.1f}G"
+    },
+
+    "custom/gpu": {
+        "exec": "~/.config/waybar/scripts/gpu.sh",
+        "return-type": "json",
+        "interval": 3,
+        "on-click": "~/.config/waybar/scripts/gpu.sh cycle && pkill -SIGUSR2 waybar",
+        "tooltip": true
+    },
+
+    "clock": {
+        "format": "󰥔 {:%H:%M}",
+        "format-alt": "󰸗 {:%a %d %b}",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%A %d %B %Y}</big>\n<tt>{calendar}</tt>",
+        "on-click": "~/.local/bin/hyprwelcome",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "left"
+        }
+    },
+
+    "custom/survival-guide": {
+        "format": "󰋗",
+        "tooltip": "Guide de survie",
+        "on-click": "~/.config/waybar/scripts/survival-guide.sh"
+    },
+
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip": "Alimentation",
+        "on-click": "~/.config/waybar/scripts/power-menu.sh"
+    },
+
+    // =========================================================
+    // SÉPARATEURS
+    // =========================================================
+
+    "custom/separator-left": {
+        "format": "|",
+        "tooltip": false
+    },
+
+    "custom/separator-center": {
+        "format": "|",
+        "tooltip": false
+    },
+
+    "custom/separator-right": {
+        "format": "|",
+        "tooltip": false
+    }
+}

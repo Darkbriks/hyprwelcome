@@ -1,0 +1,235 @@
+/* ============================================================================
+ *  Waybar — Style
+ *  Importe les couleurs depuis colors.css (généré par HyprWelcome)
+ *  ============================================================================ */
+
+@import "colors.css";
+
+/* ─── Reset & base ──────────────────────────────────────────────────────── */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+}
+
+/* ─── Barre principale — transparente, les îlots ont leur propre fond ───── */
+
+window#waybar {
+    background: transparent;
+    color: @foreground;
+}
+
+/* ─── Îlots ─────────────────────────────────────────────────────────────── */
+/* L'effet îlot est obtenu en donnant un fond et un border-radius
+ *  aux trois sections. Le gap entre elles vient du margin sur la barre. */
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background-color: @background;
+    border: 1px solid @border;
+    border-radius: 12px;
+    padding: 0 8px;
+    margin: 0 4px;
+}
+
+/* ─── Style commun des modules ──────────────────────────────────────────── */
+
+#workspaces,
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#tray,
+#taskbar,
+.custom-module {
+    padding: 0 8px;
+    color: @foreground;
+}
+
+/* ─── Logo OS ───────────────────────────────────────────────────────────── */
+
+#custom-os {
+    font-size: 16px;
+    padding: 0 12px 0 8px;
+    color: @accent_primary;
+}
+
+#custom-os:hover {
+    color: @accent_secondary;
+}
+
+/* ─── Workspaces ────────────────────────────────────────────────────────── */
+
+#workspaces button {
+    padding: 0 5px;
+    color: @foreground_dim;
+    background: transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    color: @foreground;
+    background: @background_alt;
+}
+
+#workspaces button.active {
+    color: @accent_primary;
+    background: @background_alt;
+    border-bottom: 2px solid @accent_primary;
+}
+
+#workspaces button.urgent {
+    color: @accent_danger;
+    background: @background_alt;
+}
+
+/* ─── Séparateurs ───────────────────────────────────────────────────────── */
+
+#custom-separator-left,
+#custom-separator-center,
+#custom-separator-right {
+    color: @border;
+    padding: 0 4px;
+    font-size: 16px;
+}
+
+/* ─── Lanceurs rapides ──────────────────────────────────────────────────── */
+
+#custom-launcher-brave,
+#custom-launcher-steam,
+#custom-launcher-clion {
+    font-size: 16px;
+    padding: 0 8px;
+    color: @foreground_dim;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#custom-launcher-brave:hover  { color: @accent_primary;   background: @background_alt; }
+#custom-launcher-steam:hover  { color: @accent_secondary; background: @background_alt; }
+#custom-launcher-clion:hover  { color: @accent_success;   background: @background_alt; }
+
+/* ─── Taskbar ───────────────────────────────────────────────────────────── */
+
+#taskbar {
+    padding: 0 4px;
+}
+
+#taskbar button {
+    padding: 0 4px;
+    background: transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+#taskbar button:hover {
+    background: @background_alt;
+}
+
+#taskbar button.active {
+    border-bottom: 2px solid @accent_primary;
+    background: @background_alt;
+}
+
+/* ─── Systray ───────────────────────────────────────────────────────────── */
+
+#tray {
+    padding: 0 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @accent_warning;
+    border-radius: 4px;
+}
+
+/* ─── Volume ────────────────────────────────────────────────────────────── */
+
+#pulseaudio {
+    color: @accent_primary;
+}
+
+#pulseaudio.muted {
+    color: @foreground_dim;
+}
+
+/* ─── CPU / RAM ─────────────────────────────────────────────────────────── */
+
+#cpu {
+    color: @accent_success;
+}
+
+#memory {
+    color: @accent_secondary;
+}
+
+/* Alerte si CPU > 80% (nécessite format-alt dans config) */
+#cpu.warning  { color: @accent_warning; }
+#cpu.critical { color: @accent_danger;  }
+
+/* ─── GPU cycling ───────────────────────────────────────────────────────── */
+
+#custom-gpu {
+    padding: 0 8px;
+}
+
+#custom-gpu.gpu-usage { color: @accent_success;   }
+#custom-gpu.gpu-vram  { color: @accent_secondary; }
+#custom-gpu.gpu-temp  { color: @accent_warning;   }
+
+/* ─── Horloge ───────────────────────────────────────────────────────────── */
+
+#clock {
+    color: @foreground;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+/* ─── Bouton HyprWelcome ──────────────────────────────────────────────────── */
+
+#custom-panel {
+    color: @accent_secondary;
+    padding: 0 8px;
+    font-size: 15px;
+}
+
+#custom-panel:hover {
+    color: @accent_primary;
+}
+
+/* ─── Guide de survie ───────────────────────────────────────────────────── */
+
+#custom-survival-guide {
+    color: @foreground_dim;
+    padding: 0 10px 0 6px;
+    font-size: 15px;
+    border-radius: 0 12px 12px 0;
+}
+
+#custom-survival-guide:hover {
+    color: @accent_warning;
+}
+
+/* ─── Bouton power ──────────────────────────────────────────────────────── */
+
+#custom-power {
+    color: @foreground_dim;
+    padding: 0 10px 0 6px;
+    font-size: 15px;
+    border-radius: 0 12px 12px 0;
+}
+
+#custom-power:hover {
+    color: @accent_danger;
+    background: @background_alt;
+}

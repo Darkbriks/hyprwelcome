@@ -6,7 +6,7 @@
 
 [meta]
 name        = "Celeste Dark"
-author      = "moi"
+author      = "darkbriks"
 variant     = "dark"    # "dark" | "colored" | "light"
 wallpaper   = "wallpaper.png"
 
@@ -20,6 +20,26 @@ foreground_dim      = "#B8C5D0"
 border              = "#3D4E5C"
 border_active       = "#86BBD8"
 shadow              = "#00000060"
+
+# ─── Normal colors (référencés par les actions via la clé "color") ─────────
+color_0  = "#2C3E50"     # Noir -> fond secondaire
+color_1  = "#E07A9B"     # Rouge -> rose Madeline
+color_2  = "#A8D5BA"     # Vert -> cristal vert
+color_3  = "#F4D58D"     # Jaune -> golden berry
+color_4  = "#86BBD8"     # Bleu -> ciel moyen
+color_5  = "#C2A1D3"     # Magenta -> montagne violet
+color_6  = "#7FCAE5"     # Cyan -> cristal cyan
+color_7  = "#B8C5D0"     # Blanc -> texte secondaire
+
+# ─── Bright colors (référencés par les actions via la clé "color") ─────────
+color_8  = "#4A5F75"     # Noir bright -> gris-bleu
+color_9  = "#F4A6B8"     # Rouge bright -> rose montagne
+color_10 = "#BFE5CE"     # Vert bright -> cristal vert clair
+color_11 = "#F9E4B3"     # Jaune bright -> berry clair
+color_12 = "#B4D4E1"     # Bleu bright -> ciel clair
+color_13 = "#E5C3E8"     # Magenta bright -> violet très clair
+color_14 = "#A8E4F5"     # Cyan bright -> cyan très clair
+color_15 = "#F0EDE5"     # Blanc bright -> cristal blanc
 
 # ─── Accents (référencés par les actions via la clé "color") ───────────────
 accent_primary      = "#86BBD8"     # Bleu ciel
