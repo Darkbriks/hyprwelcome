@@ -1,0 +1,66 @@
+# ============================================================================
+# Mako — Config principale
+# Les couleurs sont dans ~/.config/mako/colors (généré par HyprPanel)
+# ============================================================================
+
+include=~/.config/mako/colors
+
+# ─── Mise en page ──────────────────────────────────────────────────────────
+width=340
+height=120
+margin=12
+padding=14,16
+border-size=1
+border-radius=12
+icons=1
+max-icon-size=24
+
+# ─── Position ──────────────────────────────────────────────────────────────
+anchor=top-right
+
+# ─── Durée d'affichage (ms) ────────────────────────────────────────────────
+default-timeout=10000
+ignore-timeout=0
+
+# ─── Texte ─────────────────────────────────────────────────────────────────
+font=JetBrainsMono Nerd Font 11
+format=<b>%s</b>\n%b
+markup=1
+actions=1
+max-visible=4
+
+# ─── Comportement ──────────────────────────────────────────────────────────
+# Grouper les notifs du même app
+group-by=app-name
+
+# Clic gauche : ouvre l'app
+#on-button-left=invoke
+# Clic droit : ferme toutes
+on-button-right=dismiss-all
+# Clic milieu : ferme la notif
+on-button-middle=dismiss
+
+# ─── Urgences ──────────────────────────────────────────────────────────────
+# Low : plus discret, disparaît plus vite
+[urgency=low]
+border-size=0
+default-timeout=5000
+
+# Normal : config de base (définie au-dessus)
+
+# Critical : reste affiché jusqu'à action, bordure accent_danger
+[urgency=critical]
+ignore-timeout=1
+default-timeout=0
+
+[app-name=wp-vol]
+layer=overlay
+history=0
+anchor=center
+group-by=app-name
+format=<b>%s</b>\n%b
+default-timeout=2000
+ignore-timeout=0
+
+[app-name=volume group-index=0]
+invisible=0
