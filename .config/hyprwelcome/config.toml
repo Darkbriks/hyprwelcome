@@ -22,7 +22,7 @@ button_height = 90     # Hauteur des boutons (px)
 
 # ─── Thème actif ──────────────────────────────────────────────────────────
 [theme]
-current = "default-theme"
+current = "celeste-dark"
 # Le thème est cherché dans ~/.config/hyprwelcome/themes/<current>/
 
 # ─── Actions ──────────────────────────────────────────────────────────────

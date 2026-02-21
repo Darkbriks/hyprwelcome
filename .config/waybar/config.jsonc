@@ -205,7 +205,6 @@
         "format-alt": "󰸗 {:%a %d %b}",
         "tooltip": true,
         "tooltip-format": "<big>{:%A %d %B %Y}</big>\n<tt>{calendar}</tt>",
-        "on-click": "~/.local/bin/hyprwelcome",
         "calendar": {
             "mode": "month",
             "weeks-pos": "left"
