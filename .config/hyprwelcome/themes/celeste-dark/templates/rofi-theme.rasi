@@ -1,0 +1,136 @@
+// ============================================================================
+// Rofi — Thème (généré par HyprPanel, ne pas éditer manuellement)
+// Source : ~/.config/hyprpanel/themes/<nom>/templates/rofi-theme.rasi
+// ============================================================================
+
+// ─── Palette injectée par HyprPanel ───────────────────────────────────────
+* {
+    bg:           {{background}};
+    bg-alt:       {{background_alt}};
+    fg:           {{foreground}};
+    fg-dim:       {{foreground_dim}};
+    border-col:   {{border}};
+    accent:       {{accent_primary}};
+    accent2:      {{accent_secondary}};
+    urgent:       {{accent_danger}};
+    success:      {{accent_success}};
+
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+// ─── Fenêtre principale ────────────────────────────────────────────────────
+window {
+    width:            520px;
+    background-color: @bg;
+    border:           1px solid;
+    border-radius:    14px;
+    padding:          0;
+
+    // Ombre simulée via outline
+    outline-color:    @accent;
+    outline-width:    0;
+}
+
+// ─── Layout global ────────────────────────────────────────────────────────
+mainbox {
+    spacing:    0;
+    padding:    0;
+    children:   [ inputbar, message, listview ];
+}
+
+// ─── Barre de recherche ────────────────────────────────────────────────────
+inputbar {
+    background-color: @bg;
+    border-radius:    14px 14px 0 0;
+    padding:          14px 16px 12px 16px;
+    spacing:          10px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: @bg-alt;
+    text-color:       @accent;
+    border-radius:    8px;
+    padding:          4px 10px;
+    font:             "JetBrainsMono Nerd Font 13";
+}
+
+entry {
+    background-color: transparent;
+    text-color:       @fg;
+    placeholder:      "Rechercher…";
+    placeholder-color: @fg-dim;
+    cursor:           text;
+}
+
+// ─── Séparateur visuel ─────────────────────────────────────────────────────
+message {
+    background-color: @border-col;
+    padding:          1px 0;
+    margin:           0;
+}
+
+// ─── Liste des résultats ───────────────────────────────────────────────────
+listview {
+    background-color: transparent;
+    padding:          8px;
+    spacing:          2px;
+    lines:            7;
+    columns:          1;
+    scrollbar:        false;
+    border-radius:    0 0 14px 14px;
+    fixed-height:     true;
+}
+
+// ─── Élément individuel ────────────────────────────────────────────────────
+element {
+    background-color: transparent;
+    border-radius:    8px;
+    padding:          8px 10px;
+    spacing:          10px;
+    orientation:      horizontal;
+    children:         [ element-icon, element-text ];
+}
+
+element.normal.normal {
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+element.normal.urgent {
+    text-color: @urgent;
+}
+
+element.selected.normal {
+    background-color: @bg-alt;
+    text-color:       @fg;
+    border:           0 0 0 3px;
+    border-color:     @accent;
+}
+
+element.selected.urgent {
+    background-color: @bg-alt;
+    text-color:       @urgent;
+    border:           0 0 0 3px;
+    border-color:     @urgent;
+}
+
+element.alternate.normal {
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+// ─── Icône de l'élément ───────────────────────────────────────────────────
+element-icon {
+    size:             22px;
+    vertical-align:   0.5;
+}
+
+// ─── Texte de l'élément ───────────────────────────────────────────────────
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+    highlight:        bold;
+}

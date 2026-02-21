@@ -79,3 +79,12 @@ reload_cmd  = "pkill -SIGUSR1 kitty"
 template    = "templates/mako-colors.ini"
 destination = "~/.config/mako/colors"
 reload_cmd  = "makoctl reload"
+
+[[reload]]
+template    = "templates/hyprpaper.conf"
+destination = "~/.config/hypr/hyprpaper.conf"
+reload_cmd  = "pkill hyprpaper; hyprpaper &"
+
+[[reload]]
+template    = "templates/rofi-theme.rasi"
+destination = "~/.config/rofi/theme.rasi"

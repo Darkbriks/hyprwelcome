@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(hyprwelcome VERSION 0.2.0 LANGUAGES CXX)
+project(hyprwelcome VERSION 0.3.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -16,19 +16,23 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(tomlplusplus)
 
+# ═══════════════════════════════════════════════════════════════════
+# HYPRWELCOME
+# ═══════════════════════════════════════════════════════════════════
+
 set(SOURCES
-        src/main.cpp
-        src/MainWindow.cpp
-        src/ActionButton.cpp
-        src/ConfigLoader.cpp
-        src/ThemeManager.cpp
+        src/panel/main.cpp
+        src/panel/MainWindow.cpp
+        src/panel/ActionButton.cpp
+        src/panel/ConfigLoader.cpp
+        src/panel/ThemeManager.cpp
 )
 
 set(HEADERS
-        src/MainWindow.hpp
-        src/ActionButton.hpp
-        src/ConfigLoader.hpp
-        src/ThemeManager.hpp
+        src/panel/MainWindow.hpp
+        src/panel/ActionButton.hpp
+        src/panel/ConfigLoader.hpp
+        src/panel/ThemeManager.hpp
 )
 
 qt_add_executable(hyprwelcome ${SOURCES} ${HEADERS})
@@ -41,7 +45,7 @@ target_link_libraries(hyprwelcome PRIVATE
 
 target_compile_definitions(hyprwelcome PRIVATE
         APP_NAME="hyprwelcome"
-        APP_VERSION="0.2.0"
+        APP_VERSION="0.3.0"
 )
 
 target_compile_options(hyprwelcome PRIVATE
@@ -49,9 +53,45 @@ target_compile_options(hyprwelcome PRIVATE
         -Wall -Wextra -Wpedantic
 )
 
+# ═══════════════════════════════════════════════════════════════════
+# HYPRTODO
+# ═══════════════════════════════════════════════════════════════════
+
+set(TODO_SOURCES
+        src/todo/main.cpp
+        src/todo/TodoItem.cpp
+        src/todo/TodoStore.cpp
+        src/todo/TodoRow.cpp
+        src/todo/TodoWindow.cpp
+        src/panel/ConfigLoader.cpp
+        src/panel/ThemeManager.cpp
+)
+
+qt_add_executable(hyprtodo ${TODO_SOURCES})
+
+target_link_libraries(hyprtodo PRIVATE
+        Qt6::Core
+        Qt6::Widgets
+        tomlplusplus::tomlplusplus
+)
+
+target_compile_definitions(hyprtodo PRIVATE
+        APP_NAME="hyprtodo"
+        APP_VERSION="0.1.0"
+)
+
+target_compile_options(hyprtodo PRIVATE
+        $<$<CONFIG:Release>:-O2>
+        -Wall -Wextra -Wpedantic
+)
+
+# ═══════════════════════════════════════════════════════════════════
+# INSTALLATION
+# ═══════════════════════════════════════════════════════════════════
+
 include(GNUInstallDirs)
 
-install(TARGETS hyprwelcome
+install(TARGETS hyprwelcome hyprtodo
         RUNTIME DESTINATION "$ENV{HOME}/.local/bin"
 )
 

@@ -1,0 +1,33 @@
+// ============================================================================
+// Rofi — Config principale
+// ============================================================================
+
+configuration {
+    // ─── Modes actifs ─────────────────────────────────────────────
+    modes: "drun,filebrowser";
+
+    // ─── Comportement général ──────────────────────────────────────
+    show-icons:          true;
+    icon-theme:          "Papirus-Dark";
+    font:                "JetBrainsMono Nerd Font 12";
+
+    // ─── drun ─────────────────────────────────────────────────────
+    drun-display-format: "{name}";
+    drun-show-actions:   false;
+
+    // ─── filebrowser ──────────────────────────────────────────────
+    filebrowser {
+        directories-first: true;
+        sorting-method:    "name";
+    }
+
+    // ─── Recherche ────────────────────────────────────────────────
+    case-sensitive:      false;
+    matching:            "fuzzy";
+
+    // ─── Divers ───────────────────────────────────────────────────
+    terminal:            "kitty";
+    cycle:               true;
+}
+
+@theme "~/.config/rofi/theme.rasi"

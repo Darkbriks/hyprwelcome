@@ -35,9 +35,11 @@ fi
 if [[ "$1" == "cycle" ]]; then
     current=$(cat "$STATE_FILE")
     case "$current" in
-        usage) echo "vram"  > "$STATE_FILE" ;;
+        usage)    echo "vram_gb"  > "$STATE_FILE" ;;
         vram)  echo "temp"  > "$STATE_FILE" ;;
-        temp)  echo "usage" > "$STATE_FILE" ;;
+        vram_gb)  echo "temp"  > "$STATE_FILE" ;;
+        vram_mb)  echo "temp"  > "$STATE_FILE" ;;
+        temp)     echo "usage" > "$STATE_FILE" ;;
     esac
     exit 0
 fi
@@ -51,16 +53,24 @@ read_usage() {
     [[ -r "$busy" ]] && cat "$busy" || echo "N/A"
 }
 
-read_vram() {
+read_used_vram() {
     local used="$GPU_PATH/mem_info_vram_used"
+    [[ -r "$used" ]] && echo "$(( $(cat "$used") / 1024 / 1024 ))" || echo "N/A"
+}
+
+read_total_vram() {
     local total="$GPU_PATH/mem_info_vram_total"
-    if [[ -r "$used" && -r "$total" ]]; then
-        local used_mb=$(( $(cat "$used") / 1024 / 1024 ))
-        local total_mb=$(( $(cat "$total") / 1024 / 1024 ))
-        echo "${used_mb}/${total_mb}"
-    else
-        echo "N/A"
-    fi
+    [[ -r "$total" ]] && echo "$(( $(cat "$total") / 1024 / 1024 ))" || echo "N/A"
+}
+
+read_used_vram_gb() {
+    local used="$GPU_PATH/mem_info_vram_used"
+    [[ -r "$used" ]] && printf "%.1f" "$(( $(cat "$used") / 1024 / 1024 / 1024 ))" || echo "N/A"
+}
+
+read_total_vram_gb() {
+    local total="$GPU_PATH/mem_info_vram_total"
+    [[ -r "$total" ]] && printf "%.1f" "$(( $(cat "$total") / 1024 / 1024 / 1024 ))" || echo "N/A"
 }
 
 read_temp() {
@@ -78,17 +88,24 @@ case "$MODE" in
     usage)
         value=$(read_usage)
         text="󰍛 ${value}%"
-        tooltip="GPU — Utilisation\nClic pour VRAM →"
+        tooltip="Utilisation : ${value}%"
         ;;
-    vram)
-        value=$(read_vram)
-        text="󰘚 ${value} Mo"
-        tooltip="GPU — VRAM (utilisée/totale)\nClic pour Température →"
+    vram_mb)
+        value=$(read_used_vram)
+        text="󰘚 ${value}M"
+        total=$(read_total_vram)
+        tooltip="VRAM : ${value}M / ${total}M"
+        ;;
+    vram_gb)
+        value=$(read_used_vram_gb)
+        text="󰘚 ${value}G"
+        total=$(read_total_vram_gb)
+        tooltip="VRAM : ${value}G / ${total}G"
         ;;
     temp)
         value=$(read_temp)
         text="󰔄 ${value}°C"
-        tooltip="GPU — Température\nClic pour Utilisation →"
+        tooltip="Température : ${value}°C"
         ;;
 esac
 

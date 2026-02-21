@@ -22,8 +22,10 @@
     // ─── Îlot gauche ──────────────────────────────────────────────
     "modules-left": [
         "custom/os",
+        "custom/wm",
         "hyprland/workspaces",
         "custom/separator-left",
+        "custom/todo",
         "custom/panel"
     ],
 
@@ -57,7 +59,17 @@
     "custom/os": {
         "format": "󰣇",
         "tooltip": false,
-        "on-click": "rofi -show drun"
+        "on-click": "xdg-open https://archlinux.org",
+        "on-click-right": "xdg-open https://wiki.archlinux.org"
+    },
+
+    "custom/wm": {
+        "format": "\uF359",
+        "tooltip": false,
+        "on-click": "xdg-open https://hyprland.org",
+        "on-click-right": "xdg-open https://wiki.hyprland.org",
+        "on-click-middle": "xdg-open https://github.com/Alexays/Waybar/wiki",
+        "min-length": 2 // Longeur minimale en caractères
     },
 
     "hyprland/workspaces": {
@@ -96,6 +108,13 @@
         "format": "󰒓",
         "tooltip": "HyprWelcome",
         "on-click": "~/.local/bin/hyprwelcome"
+    },
+
+    "custom/todo": {
+        "format": "",
+        "tooltip": "Todo",
+        "on-click": "~/.local/bin/hyprtodo",
+        "min-length": 2
     },
 
     // =========================================================
@@ -160,22 +179,25 @@
         "interval": 3,
         "format": "󰻠 {usage}%",
         "tooltip": true,
-        "tooltip-format": "CPU : {usage}%\nLoad : {load}"
+        "tooltip-format": "CPU : {usage}%\nLoad : {load}",
+        "min-length": 7
     },
 
     "memory": {
-        "interval": 5,
+        "interval": 3,
         "format": "󰍛 {used:.1f}G",
         "tooltip": true,
-        "tooltip-format": "RAM : {used:.1f}G / {total:.1f}G\nSwap : {swapUsed:.1f}G / {swapTotal:.1f}G"
+        "tooltip-format": "RAM : {used:.1f}G / {total:.1f}G\nSwap : {swapUsed:.1f}G / {swapTotal:.1f}G",
+        "min-length": 7
     },
 
     "custom/gpu": {
-        "exec": "~/.config/waybar/scripts/gpu.sh",
+        "exec": "~/.config/waybar/scripts/gpu.sh && ~/.config/waybar/scripts/gpu.sh cycle",
         "return-type": "json",
         "interval": 3,
         "on-click": "~/.config/waybar/scripts/gpu.sh cycle && pkill -SIGUSR2 waybar",
-        "tooltip": true
+        "tooltip": true,
+        "min-length": 7
     },
 
     "clock": {

@@ -38,7 +38,7 @@ QString ThemeManager::expandHome(const QString& path) {
     return QString::fromUtf8(home) + path.sliced(1);
 }
 
-QString ThemeManager::renderTemplate(const std::string& tmpl, const ThemeColors& colors) {
+QString ThemeManager::renderTemplate(const std::string& tmpl, const ThemeColors& colors, const std::string& wallpaperAbsString) {
     std::regex  pattern{R"(\{\{(\w+)(?:\|(\w+))?\}\})"};
 
     std::string out;
@@ -53,6 +53,10 @@ QString ThemeManager::renderTemplate(const std::string& tmpl, const ThemeColors&
         const QString key      = QString::fromStdString(match[1].str());
         const QString modifier = QString::fromStdString(match[2].str());
         QString       value    = colors.resolve(key);
+
+        if (key == "wallpaper_path") {
+            value = QString::fromStdString(wallpaperAbsString);
+        }
 
         if (modifier == "raw" && value.startsWith('#'))
             value = value.sliced(1);  // retire le #
@@ -161,6 +165,8 @@ void ThemeManager::applyTheme(const QString& name) {
     const auto colors = loadTheme(name);
     const auto root   = toml::parse_file(colorsPath.string());
 
+    const fs::path wallpaperAbs = themeDir / colors.wallpaper.toStdString();
+
     if (const auto reloadArr = root["reload"].as_array()) {
         for (const auto& node : *reloadArr) {
             const auto tbl = node.as_table();
@@ -182,7 +188,7 @@ void ThemeManager::applyTheme(const QString& name) {
             const std::string tmplContent{std::istreambuf_iterator<char>(in),
                                           std::istreambuf_iterator<char>()};
 
-            const QString rendered = renderTemplate(tmplContent, colors);
+            const QString rendered = renderTemplate(tmplContent, colors, wallpaperAbs.string());
 
             const fs::path destPath{destRaw.toStdString()};
             fs::create_directories(destPath.parent_path());

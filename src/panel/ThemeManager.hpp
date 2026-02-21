@@ -50,7 +50,7 @@ public:
 private:
     static fs::path themesDir();
     static QString  expandHome(const QString& path);
-    static QString  renderTemplate(const std::string& tmpl, const ThemeColors& colors);
+    static QString  renderTemplate(const std::string& tmpl, const ThemeColors& colors, const std::string& wallpaperAbsString);
     static void execReload(const QString& cmd);
     static void setWallpaper(const fs::path& themeDir, const QString& wallpaperFile);
 };
