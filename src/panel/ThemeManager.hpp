@@ -6,6 +6,18 @@
 
 namespace fs = std::filesystem;
 
+struct LockscreenConfig {
+    QString wallpaper{"lockscreen.png"};
+    int     timePosX{0},    timePosY{-180};
+    int     datePosX{0},    datePosY{-110};
+    int     inputPosX{0},   inputPosY{80};
+    int     loginPosX{0},   loginPosY{140};
+    int     timeFontSize{72};
+    int     dateFontSize{18};
+    int     labelFontSize{13};
+    float   backgroundOpacity{0.6f};
+};
+
 struct ThemeColors {
     QString background;
     QString backgroundAlt;
@@ -24,9 +36,12 @@ struct ThemeColors {
     int     buttonBorderRadius{10};
     int     buttonBorderWidth{1};
 
+    LockscreenConfig lockscreen;
+
     QString name;
     QString variant;    // "dark" | "colored" | "light"
     QString wallpaper;
+    QString absolutePath; // Absolute path to the theme directory
 
     [[nodiscard]] QString resolve(const QString& key) const;
 };
@@ -38,6 +53,7 @@ struct ReloadEntry {
 };
 
 class ThemeManager {
+    friend struct ThemeColors;
 public:
     static ThemeColors loadTheme(const QString& name);
 

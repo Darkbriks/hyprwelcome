@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QScreen>
 
+#include "TodoRow.hpp"
+
 static const QMap<QString, QStringList> kThemeDecorations = {
     {"celeste",   {"🍓", "🏔️", "❄️", "🌟", "💜"}},
     {"default",   {"✦", "◆", "◇", "✧", "⋆"}},

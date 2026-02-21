@@ -58,6 +58,29 @@ icon_color          = "#E8E4DF"
 border_radius       = 10            # px
 border_width        = 1             # px
 
+# ─── Lockscreen ────────────────────────────────────────────────────────────
+[lockscreen]
+wallpaper = "LockScreenWallpaper.png"
+
+# Position des éléments — coordonnées relatives à l'écran
+# (0, 0) = centre, positif = droite/bas, négatif = gauche/haut
+time_position_x   = 0
+time_position_y   = -180
+date_position_x   = 0
+date_position_y   = -110
+input_position_x  = 0
+input_position_y  = 80
+login_position_x  = 0
+login_position_y  = 140
+
+# Tailles de police
+time_font_size    = 72
+date_font_size    = 18
+label_font_size   = 13
+
+# Opacité du fond (0.0 - 1.0)
+background_opacity = 0.6
+
 # ─── Configs à recharger lors du switch de thème ───────────────────────────
 # Chaque entrée : [chemin_template, chemin_destination]
 [[reload]]
@@ -88,8 +111,9 @@ reload_cmd  = "pkill hyprpaper; hyprpaper &"
 [[reload]]
 template    = "templates/rofi-theme.rasi"
 destination = "~/.config/rofi/theme.rasi"
+reload_cmd  = "null"
 
 [[reload]]
-template    = "templates/mako-colors.ini"
-destination = "~/.config/mako/colors"
-reload_cmd  = "makoctl reload"
+template    = "templates/hyprlock.conf"
+destination = "~/.config/hypr/hyprlock.conf"
+reload_cmd  = "null"
