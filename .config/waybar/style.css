@@ -207,6 +207,16 @@ window#waybar {
     color: @accent_primary;
 }
 
+#custom-todo {
+    color: @accent_secondary;
+    padding: 0 8px;
+    font-size: 15px;
+}
+
+#custom-todo:hover {
+    color: @accent_primary;
+}
+
 /* ─── Guide de survie ───────────────────────────────────────────────────── */
 
 #custom-survival-guide {
@@ -232,4 +242,26 @@ window#waybar {
 #custom-power:hover {
     color: @accent_danger;
     background: @background_alt;
+}
+
+/* ─── wf-recorder ──────────────────────────────────────────────────────── */
+
+#custom-wf-recorder {
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+#custom-wf-recorder.recording {
+    color: #ff2b2b;
+    animation: blink 1s infinite;
+}
+
+#custom-wf-recorder.idle {
+    color: #666;
+}
+
+@keyframes blink {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.3; }
+    100% { opacity: 1; }
 }
